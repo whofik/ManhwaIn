@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ManhwaIn — Baca manhwa, manhua, dan webtoon terlengkap & terupdate.">
+    <title><%= typeof title !== 'undefined' ? title : 'ManhwaIn' %></title>
+
+    <%- include('theme-init') %>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        ink: { 950:'#0a0a0f', 900:'#0f1117', 850:'#151823', 800:'#1c2030', 700:'#272c40' },
+                        brand: { 400:'#a78bfa', 500:'#8b5cf6', 600:'#7c3aed' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root { color-scheme: dark; }
+        html.dark { color-scheme: dark; }
+        html:not(.dark) { color-scheme: light; }
+
+        html:not(.dark) body { background:#eef2f7; color:#0f172a; }
+
+        html:not(.dark) .bg-ink-950 { background:#eef2f7 !important; }
+        html:not(.dark) .bg-ink-900,
+        html:not(.dark) .bg-ink-850,
+        html:not(.dark) .bg-ink-800 { background:#ffffff !important; }
+
+        html:not(.dark) .hover\:bg-ink-850:hover { background:#f1f5f9 !important; }
+        html:not(.dark) .hover\:bg-ink-800:hover { background:#f1f5f9 !important; }
+
+        html:not(.dark) .text-white { color:#0f172a !important; }
+        html:not(.dark) .text-slate-50,
+        html:not(.dark) .text-slate-100,
+        html:not(.dark) .text-slate-200,
+        html:not(.dark) .text-slate-300 { color:#1e293b !important; }
+        html:not(.dark) .text-slate-400,
+        html:not(.dark) .text-slate-500,
+        html:not(.dark) .text-slate-600 { color:#475569 !important; }
+        html:not(.dark) .text-slate-700 { color:#334155 !important; }
+        html:not(.dark) .text-brand-300,
+        html:not(.dark) .text-brand-400 { color:#6d28d9 !important; }
+        html:not(.dark) .hover\:text-brand-300:hover,
+        html:not(.dark) .group-hover\:text-brand-400 { color:#6d28d9 !important; }
+
+        html:not(.dark) .border-white\/5 { border-color: rgba(15,23,42,.10) !important; }
+
+        html:not(.dark) header,
+        html:not(.dark) footer,
+        html:not(.dark) [style*="rgba(15,17,23"] { background: rgba(255,255,255,.82) !important; }
+
+        html:not(.dark) .scrollbar-thin::-webkit-scrollbar-thumb { background:#cbd5e1; }
+
+        * { -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .clamp-2 { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+        .clamp-1 { display:-webkit-box; -webkit-line-clamp:1; -webkit-box-orient:vertical; overflow:hidden; }
+        .scrollbar-thin::-webkit-scrollbar { width:6px; height:6px; }
+        .scrollbar-thin::-webkit-scrollbar-thumb { background:#3f4356; border-radius:10px; }
+        .scrollbar-thin::-webkit-scrollbar-track { background:transparent; }
+        .reveal { opacity:0; transform:translateY(10px); animation:rise .45s ease forwards; }
+        @keyframes rise { to { opacity:1; transform:none; } }
+        .card-hover { transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease; }
+        .card-hover:hover { transform:translateY(-6px); }
+        .pagination-fraction {
+            background:rgba(0,0,0,.65)!important; color:#fff; padding:3px 12px; border-radius:999px;
+            width:auto!important; left:50%!important; transform:translateX(-50%); bottom:12px!important; font-size:13px; font-weight:600;
+        }
+        .swiper-button-next,.swiper-button-prev { color:rgba(255,255,255,.55)!important; transform:scale(.7); }
+        .swiper-button-next:after,.swiper-button-prev:after { font-weight:900; }
+    </style>
+</head>

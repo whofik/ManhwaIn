@@ -1,0 +1,36 @@
+<body class="bg-ink-950 text-slate-200 antialiased min-h-screen flex flex-col overflow-x-hidden">
+
+    <header class="sticky top-0 z-50 border-b border-white/5" style="background:rgba(15,17,23,.8);backdrop-filter:blur(12px);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center gap-3">
+            <button type="button" id="sidebar-toggle" aria-label="Menu" class="lg:hidden w-10 h-10 grid place-items-center rounded-xl bg-ink-850 border border-white/5 text-slate-300 hover:text-white transition">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <%- include('brand') %>
+
+            <%- include('search-form', { query: typeof query !== 'undefined' ? query : '' }) %>
+
+            <div class="ml-auto flex items-center gap-2">
+                <button type="button" id="theme-toggle" aria-label="Ganti tema"
+                    class="w-10 h-10 grid place-items-center rounded-xl bg-ink-850 border border-white/5 text-slate-300 hover:text-white hover:bg-ink-800 transition">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block text-amber-300"></i>
+                </button>
+                <button type="button" id="mobile-search" aria-label="Cari" class="md:hidden w-10 h-10 grid place-items-center rounded-xl bg-ink-850 border border-white/5 text-slate-300 hover:text-white transition">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-search-bar" class="md:hidden hidden px-4 pb-3">
+            <form action="/search" method="GET" class="relative">
+                <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                <input name="q" value="<%= typeof query !== 'undefined' ? query : '' %>" placeholder="Cari manhwa…" class="w-full bg-ink-850 border border-white/5 rounded-xl pl-10 pr-4 py-2.5 text-sm text-slate-100 placeholder-slate-500 outline-none">
+            </form>
+        </div>
+    </header>
+
+    <div class="flex w-full max-w-7xl mx-auto flex-1">
+
+        <%- include('sidebar', { active: typeof active !== 'undefined' ? active : '' }) %>
+
+        <main class="flex-1 min-w-0 px-4 sm:px-6 py-6">

@@ -1,0 +1,100 @@
+<%- include('partials/head', { title: `${data.title} — ManhwaIn` }) %>
+<%- include('partials/navbar', { active: '' }) %>
+
+<div class="reveal max-w-3xl mx-auto">
+    <div class="sticky top-16 z-40 rounded-2xl px-4 py-3 mb-4 flex items-center gap-3" style="background:rgba(15,17,23,.85);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.05);">
+        <a href="<%= data.navigation.allChapters || '/' %>" class="w-9 h-9 grid place-items-center rounded-xl bg-ink-850 hover:bg-ink-800 text-slate-300 hover:text-white transition shrink-0" title="Daftar chapter">
+            <i class="fas fa-list"></i>
+        </a>
+        <h1 class="flex-1 min-w-0 text-sm sm:text-base font-bold text-white clamp-1"><%= data.title %></h1>
+        <div class="flex items-center gap-1.5">
+            <% if (data.navigation.prev) { %>
+                <a href="<%= data.navigation.prev %>" class="px-3 py-1.5 rounded-xl bg-ink-850 hover:bg-brand-600 text-slate-200 hover:text-white text-sm font-medium transition"><i class="fas fa-chevron-left"></i></a>
+            <% } %>
+            <% if (data.navigation.next) { %>
+                <a href="<%= data.navigation.next %>" class="px-3 py-1.5 rounded-xl bg-ink-850 hover:bg-brand-600 text-slate-200 hover:text-white text-sm font-medium transition"><i class="fas fa-chevron-right"></i></a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-center gap-2 mb-4">
+        <button type="button" id="btn-scroll" class="px-4 py-1.5 rounded-xl text-sm font-semibold bg-brand-600 text-white transition">Gulir</button>
+        <button type="button" id="btn-swipe" class="px-4 py-1.5 rounded-xl text-sm font-semibold bg-ink-850 border border-white/5 text-slate-300 hover:text-white transition">Geser</button>
+    </div>
+
+    <div id="reader-scroll" class="flex flex-col items-center gap-1">
+        <% data.images.forEach((img, i) => { %>
+            <img src="<%= img %>" alt="Halaman <%= i + 1 %>" loading="<%= i < 2 ? 'eager' : 'lazy' %>" class="w-full rounded-md bg-ink-900">
+        <% }) %>
+    </div>
+
+    <div id="reader-swipe" class="hidden relative w-full h-[80vh] rounded-2xl overflow-hidden bg-black">
+        <div class="swiper readerSwiper w-full h-full">
+            <div class="swiper-wrapper">
+                <% data.images.forEach((img, i) => { %>
+                    <div class="swiper-slide grid place-items-center bg-black">
+                        <img src="<%= img %>" alt="Halaman <%= i + 1 %>" class="max-w-full max-h-full object-contain">
+                    </div>
+                <% }) %>
+            </div>
+            <div class="swiper-pagination pagination-fraction"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <div class="flex items-center justify-between gap-3 mt-5">
+        <% if (data.navigation.prev) { %>
+            <a href="<%= data.navigation.prev %>" class="flex-1 text-center px-4 py-3 rounded-xl bg-ink-850 border border-white/5 hover:bg-brand-600/20 hover:border-brand-500/30 text-slate-200 font-semibold transition"><i class="fas fa-chevron-left mr-1"></i> Sebelumnya</a>
+        <% } else { %>
+            <div class="flex-1 text-center px-4 py-3 rounded-xl bg-ink-900 border border-white/5 text-slate-600 cursor-not-allowed">Sebelumnya</div>
+        <% } %>
+        <% if (data.navigation.next) { %>
+            <a href="<%= data.navigation.next %>" class="flex-1 text-center px-4 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold transition">Selanjutnya <i class="fas fa-chevron-right ml-1"></i></a>
+        <% } else { %>
+            <div class="flex-1 text-center px-4 py-3 rounded-xl bg-ink-900 border border-white/5 text-slate-600 cursor-not-allowed">Selanjutnya</div>
+        <% } %>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+<%- include('partials/scripts') %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const bScroll = document.getElementById('btn-scroll');
+        const bSwipe = document.getElementById('btn-swipe');
+        const rScroll = document.getElementById('reader-scroll');
+        const rSwipe = document.getElementById('reader-swipe');
+        let swiper = null;
+
+        function initSwiper() {
+            if (!swiper) {
+                swiper = new Swiper('.readerSwiper', {
+                    direction: 'horizontal',
+                    speed: 350,
+                    keyboard: { enabled: true },
+                    mousewheel: { sensitivity: 1, forceToAxis: true },
+                    pagination: { el: '.swiper-pagination', type: 'fraction' },
+                    navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' }
+                });
+            }
+        }
+        function setScroll() {
+            rScroll.classList.remove('hidden');
+            rSwipe.classList.add('hidden');
+            bScroll.className = "px-4 py-1.5 rounded-xl text-sm font-semibold bg-brand-600 text-white transition";
+            bSwipe.className = "px-4 py-1.5 rounded-xl text-sm font-semibold bg-ink-850 border border-white/5 text-slate-300 hover:text-white transition";
+        }
+        function setSwipe() {
+            rScroll.classList.add('hidden');
+            rSwipe.classList.remove('hidden');
+            initSwiper();
+            if (swiper && typeof swiper.update === 'function') swiper.update();
+            bSwipe.className = "px-4 py-1.5 rounded-xl text-sm font-semibold bg-brand-600 text-white transition";
+            bScroll.className = "px-4 py-1.5 rounded-xl text-sm font-semibold bg-ink-850 border border-white/5 text-slate-300 hover:text-white transition";
+        }
+        bScroll.addEventListener('click', setScroll);
+        bSwipe.addEventListener('click', setSwipe);
+    });
+</script>

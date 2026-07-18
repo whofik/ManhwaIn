@@ -1,5 +1,5 @@
 {
-  "name": "wibukon",
+  "name": "manhwain",
   "version": "1.0.0",
   "description": "Web streaming anime dengan Express dan Tailwind",
   "main": "index.js",
@@ -16,9 +16,9 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.13.2",
+    "cheerio": "^1.2.0",
+    "dotenv": "16.4.5",
     "ejs": "^3.1.10",
-    "express": "^4.21.2",
-    "dotenv": "16.4.5"
+    "express": "^4.21.2"
   }
 }
-

@@ -1,0 +1,31 @@
+<script>
+    (function () {
+        var sb = document.getElementById('sidebar');
+        var ov = document.getElementById('sidebar-overlay');
+        var toggle = document.getElementById('sidebar-toggle');
+        if (sb && toggle) {
+            toggle.addEventListener('click', function () {
+                sb.classList.remove('-translate-x-full');
+                if (ov) ov.classList.remove('hidden');
+            });
+        }
+        if (ov) ov.addEventListener('click', function () {
+            sb.classList.add('-translate-x-full');
+            ov.classList.add('hidden');
+        });
+
+        var links = sb.querySelectorAll('a');
+        links.forEach(function (link) {
+            link.addEventListener('click', function () {
+                sb.classList.add('-translate-x-full');
+                if (ov) ov.classList.add('hidden');
+            });
+        });
+
+        var mBtn = document.getElementById('mobile-search');
+        var mBar = document.getElementById('mobile-search-bar');
+        if (mBtn && mBar) {
+            mBtn.addEventListener('click', function () { mBar.classList.toggle('hidden'); });
+        }
+    })();
+</script>

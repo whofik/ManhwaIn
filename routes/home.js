@@ -1,19 +1,19 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
+const scraper = require('../lib/ManhwaIndo');
 
-module.exports = (mobinime) => {
-    router.get('/', async (req, res) => {
-        try {
-            const homeData = await mobinime.fetchHomeData()
-            res.render('index', {
-                data: homeData,
-                active: 'home',
-                query: null
-            })
-        } catch (error) {
-            res.render('error', { error: error.message })
-        }
-    })
+router.get('/', async (req, res) => {
+    try {
+        const data = await scraper.home();
+        res.render('index', { 
+            title: 'ManhwaIn - Tempat Baca Manhwa Terlengkap', 
+            popular: data.popular,
+            latest: data.latest
+        });
+    } catch (error) {
+        console.error(error);
+        res.render('error', { title: 'Error', message: 'Gagal memuat beranda.' });
+    }
+});
 
-    return router
-}
+module.exports = router;

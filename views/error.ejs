@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <%- include('layout/head') %>
-</head>
-<body class="flex items-center justify-center min-h-screen p-4 text-center">
-    <div>
-        <h1 class="text-4xl font-bold text-red-500 mb-2">Oops!</h1>
-        <p class="text-slate-400 mb-6"><%= error || 'Terjadi kesalahan' %></p>
-        <a href="/" class="bg-slate-800 px-6 py-2 rounded-full text-white text-sm hover:bg-slate-700">Kembali ke Beranda</a>
-    </div>
-</body>
-</html>
+<%- include('partials/head', { title: (typeof title !== 'undefined' ? title : 'Error') + ' — ManhwaIn' }) %>
+<%- include('partials/navbar', { active: '' }) %>
 
+<div class="reveal flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+    <i class="fas fa-circle-exclamation text-5xl text-rose-400 mb-4"></i>
+    <h1 class="text-2xl font-extrabold text-white mb-2"><%= typeof title !== 'undefined' ? title : 'Terjadi Kesalahan' %></h1>
+    <p class="text-slate-400 mb-6 max-w-sm"><%= typeof message !== 'undefined' ? message : 'Gagal memuat halaman. Coba lagi nanti.' %></p>
+    <a href="/" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold transition">Kembali ke Beranda</a>
+</div>
+
+<%- include('partials/footer') %>
+<%- include('partials/scripts') %>

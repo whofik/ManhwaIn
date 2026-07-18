@@ -1,85 +1,59 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <%- include('layout/head') %>
-</head>
-<body class="pb-24 pt-16 md:pt-20 animate-fade">
-    <%- include('layout/navbar') %>
+<%- include('partials/head', { title: 'ManhwaIn — Baca Manhwa Terlengkap & Terupdate' }) %>
+<%- include('partials/navbar', { active: 'home' }) %>
 
-    <section class="md:container md:mx-auto md:px-4 mb-8">
-        <div class="flex overflow-x-auto snap-x snap-mandatory hide-scrollbar gap-0 sm:gap-4 md:gap-6 py-2 md:py-4">
-            <% data.ongoing.slice(0, 5).forEach((item, index) => { %>
-                <article class="w-full sm:w-[85%] md:w-[80%] lg:w-[70%] xl:w-[60%] flex-shrink-0 snap-center relative aspect-[16/9] md:aspect-[21/9] sm:rounded-2xl md:rounded-3xl overflow-hidden group">
-                    <figure class="w-full h-full m-0">
-                        <img src="<%= item.img %>" alt="<%= item.title %>" class="w-full h-full object-cover group-hover:scale-105 transition duration-700 ease-out">
-                    </figure>
-                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 left-0 w-full p-5 sm:p-6 md:p-10 flex flex-col items-start animate-slide" style="animation-delay: 0.2s;">
-                        <span class="bg-purple-600 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full mb-2 sm:mb-3 uppercase tracking-wider">Sedang Tayang</span>
-                        <h2 class="text-xl sm:text-2xl md:text-4xl font-black text-white leading-tight mb-2 md:mb-4 line-clamp-2 drop-shadow-lg"><%= item.title %></h2>
-                        <div class="flex items-center gap-2 sm:gap-3 text-[10px] sm:text-xs md:text-sm text-zinc-300 font-medium mb-3 sm:mb-4">
-                            <span class="flex items-center gap-1"><svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg> <%= item.rating %></span>
-                            <span>&bull;</span>
-                            <span>Episode <%= item.eps %></span>
+<section class="reveal">
+    <div class="flex items-center gap-3 mb-5">
+        <span class="w-1.5 h-6 rounded-full bg-brand-600"></span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">Sedang Populer</h2>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-5">
+        <% popular.forEach(item => { %>
+            <a href="<%= item.url %>" class="card-hover group block">
+                <div class="relative rounded-2xl overflow-hidden bg-ink-850 border border-white/5 aspect-[2/3]">
+                    <img src="<%= item.image %>" alt="<%= item.title %>" loading="lazy"
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent"></div>
+                    <% if (item.rating) { %>
+                        <div class="absolute top-2.5 left-2.5 flex items-center gap-1 bg-black/60 backdrop-blur px-2 py-1 rounded-lg text-[11px] font-bold text-amber-300">
+                            <i class="fas fa-star"></i> <%= item.rating %>
                         </div>
-                        <a href="/anime/<%= item.slug %>" class="bg-white text-black px-4 sm:px-6 py-2 sm:py-2.5 rounded-full font-bold text-xs sm:text-sm hover:bg-zinc-200 transition flex items-center gap-2">
-                            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            Tonton Sekarang
-                        </a>
+                    <% } %>
+                    <div class="absolute bottom-0 inset-x-0 p-2.5">
+                        <p class="text-white text-xs font-semibold clamp-1"><%= item.chapter %></p>
                     </div>
-                </article>
-            <% }) %>
-        </div>
-    </section>
+                </div>
+                <h3 class="mt-2 text-sm font-semibold text-slate-200 line-clamp-2 group-hover:text-brand-400 transition-colors"><%= item.title %></h3>
+            </a>
+        <% }) %>
+    </div>
+</section>
 
-    <main class="container mx-auto px-4 space-y-10">
-        <section class="animate-slide" style="animation-delay: 0.3s;">
-            <div class="flex justify-between items-end mb-4 sm:mb-5">
-                <h2 class="text-lg sm:text-xl font-bold text-white">Episode Terbaru</h2>
-                <a href="/schedule" class="text-[10px] sm:text-xs font-medium text-purple-400 hover:text-purple-300">Lihat Jadwal &rarr;</a>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
-                <% data.ongoing.forEach(item => { %>
-                    <article class="group relative rounded-xl overflow-hidden aspect-[3/4] glass-card hover:border-purple-500/50 transition duration-300">
-                        <figure class="w-full h-full m-0">
-                            <img src="<%= item.img %>" alt="<%= item.title %>" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        </figure>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
-                        <div class="absolute top-2 right-2 bg-black/60 backdrop-blur text-[10px] font-bold text-white px-2 py-1 rounded border border-white/10">
-                            Eps <%= item.eps %>
-                        </div>
-                        <div class="absolute bottom-0 p-2 sm:p-3 w-full">
-                            <h3 class="text-white text-[10px] sm:text-xs font-bold line-clamp-2 leading-tight group-hover:text-purple-300 transition"><%= item.title %></h3>
-                        </div>
-                        <a href="/anime/<%= item.slug %>" aria-label="<%= item.title %>" class="absolute inset-0 z-10"></a>
-                    </article>
-                <% }) %>
-            </div>
-        </section>
+<section class="reveal mt-10">
+    <div class="flex items-center gap-3 mb-5">
+        <span class="w-1.5 h-6 rounded-full bg-brand-600"></span>
+        <h2 class="text-xl sm:text-2xl font-extrabold text-white">Update Terbaru</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <% latest.forEach(item => { %>
+            <article class="group flex gap-4 p-3 rounded-2xl bg-ink-900 border border-white/5 hover:border-brand-500/30 hover:bg-ink-850 transition card-hover">
+                <a href="<%= item.url %>" class="shrink-0 w-24 sm:w-28 aspect-[2/3] rounded-xl overflow-hidden bg-ink-850">
+                    <img src="<%= item.image %>" alt="<%= item.title %>" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                </a>
+                <div class="min-w-0 flex flex-col">
+                    <a href="<%= item.url %>" class="font-bold text-white text-[15px] leading-snug clamp-2 group-hover:text-brand-400 transition-colors"><%= item.title %></a>
+                    <div class="mt-2.5 flex flex-col gap-1.5 overflow-hidden">
+                        <% item.chapters.slice(0, 3).forEach(ch => { %>
+                            <a href="<%= ch.url %>" class="flex items-center justify-between gap-2 px-2.5 py-1.5 rounded-lg bg-ink-850 hover:bg-brand-600/20 border border-white/5 hover:border-brand-500/30 transition text-sm">
+                                <span class="font-medium text-slate-200 truncate"><%= ch.chapter %></span>
+                                <span class="text-[11px] text-slate-500 whitespace-nowrap"><%= ch.time %></span>
+                            </a>
+                        <% }) %>
+                    </div>
+                </div>
+            </article>
+        <% }) %>
+    </div>
+</section>
 
-        <section class="animate-slide" style="animation-delay: 0.4s;">
-            <h2 class="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-5">Rekomendasi Anime</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
-                <% data.recommend.forEach(item => { %>
-                    <article class="relative p-2 sm:p-3 rounded-2xl glass-card hover:bg-white/5 transition group">
-                        <div class="flex gap-3 sm:gap-4">
-                            <figure class="w-16 h-24 sm:w-20 sm:h-28 flex-shrink-0 rounded-lg overflow-hidden relative m-0">
-                                <img src="<%= item.img %>" alt="<%= item.title %>" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                            </figure>
-                            <div class="flex flex-col justify-center py-1">
-                                <h3 class="text-xs sm:text-sm font-bold text-white line-clamp-2 mb-1 group-hover:text-purple-400 transition"><%= item.title %></h3>
-                                <div class="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs text-zinc-400 mb-1.5 sm:mb-2">
-                                    <span class="bg-zinc-800 px-1.5 py-0.5 rounded"><%= item.year %></span>
-                                    <span class="flex items-center gap-1 text-yellow-500"><svg class="w-2.5 h-2.5 sm:w-3 sm:h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg> <%= item.rating %></span>
-                                </div>
-                                <span class="text-[9px] sm:text-[10px] text-zinc-500 line-clamp-1"><%= item.status %></span>
-                            </div>
-                        </div>
-                        <a href="/anime/<%= item.slug %>" aria-label="<%= item.title %>" class="absolute inset-0 z-10"></a>
-                    </article>
-                <% }) %>
-            </div>
-        </section>
-    </main>
-</body>
-</html>
+<%- include('partials/footer') %>
+<%- include('partials/scripts') %>

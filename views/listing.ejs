@@ -1,0 +1,33 @@
+<%- include('partials/head', { title: `${heading} — ManhwaIn` }) %>
+<%- include('partials/navbar', { active: activeKey }) %>
+
+<section class="reveal">
+    <div class="flex items-center gap-3 mb-6">
+        <span class="w-1.5 h-6 rounded-full bg-brand-600"></span>
+        <h1 class="text-xl sm:text-2xl font-extrabold text-white"><%= heading %></h1>
+    </div>
+
+    <% if (results && results.length > 0) { %>
+        <%- include('partials/manga-grid', { items: results }) %>
+
+        <% if (pagination.hasNext || pagination.currentPage > 1) { %>
+            <div class="flex justify-center items-center gap-2 mt-10">
+                <% if (pagination.currentPage > 1) { %>
+                    <a href="<%= baseUrl %>?page=<%= pagination.currentPage - 1 %>" class="px-4 py-2 rounded-xl bg-ink-850 border border-white/5 hover:bg-ink-800 text-slate-200 text-sm font-medium transition">Sebelumnya</a>
+                <% } %>
+                <span class="px-4 py-2 rounded-xl bg-brand-600 text-white text-sm font-bold"><%= pagination.currentPage %></span>
+                <% if (pagination.hasNext) { %>
+                    <a href="<%= baseUrl %>?page=<%= pagination.currentPage + 1 %>" class="px-4 py-2 rounded-xl bg-ink-850 border border-white/5 hover:bg-ink-800 text-slate-200 text-sm font-medium transition">Selanjutnya</a>
+                <% } %>
+            </div>
+        <% } %>
+    <% } else { %>
+        <div class="text-center py-20">
+            <i class="fas fa-ghost text-6xl text-slate-700 mb-5"></i>
+            <p class="text-slate-400 text-lg">Belum ada konten di sini.</p>
+        </div>
+    <% } %>
+</section>
+
+<%- include('partials/footer') %>
+<%- include('partials/scripts') %>

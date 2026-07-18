@@ -1,38 +1,12 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <%- include('layout/head') %>
-</head>
-<body class="pb-24 pt-16 md:pt-20 animate-fade flex flex-col min-h-screen">
-    <%- include('layout/navbar') %>
+<%- include('partials/head', { title: '404 — ManhwaIn' }) %>
+<%- include('partials/navbar', { active: '' }) %>
 
-    <main class="flex-grow flex flex-col items-center justify-center p-4 text-center">
-        <div class="relative mb-8 animate-slide">
-            <h1 class="text-[150px] font-black text-transparent bg-clip-text bg-gradient-to-b from-purple-500/20 to-transparent leading-none select-none">
-                404
-            </h1>
-            <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-32 h-32 bg-zinc-800/80 backdrop-blur rounded-3xl border border-white/5 shadow-2xl flex items-center justify-center">
-                    <svg class="w-16 h-16 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                </div>
-            </div>
-        </div>
+<div class="reveal flex flex-col items-center justify-center min-h-[60vh] text-center px-4">
+    <div class="text-7xl font-extrabold text-white mb-2">404</div>
+    <h2 class="text-xl font-bold text-white mb-2">Halaman tidak ditemukan</h2>
+    <p class="text-slate-400 mb-6 max-w-sm">Sepertinya chapter yang kamu cari sudah pindah atau belum terbit.</p>
+    <a href="/" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold transition">Kembali ke Beranda</a>
+</div>
 
-        <div class="space-y-4 max-w-md mx-auto animate-slide" style="animation-delay: 0.1s;">
-            <h2 class="text-2xl font-bold text-white">Halaman Tidak Ditemukan</h2>
-            <p class="text-zinc-400">
-                Sepertinya kamu tersesat di dimensi lain. Halaman yang kamu cari tidak ditemukan atau sudah dipindahkan.
-            </p>
-        </div>
-
-        <div class="mt-8 flex gap-4 animate-slide" style="animation-delay: 0.2s;">
-            <button onclick="history.back()" class="px-6 py-2.5 rounded-full border border-white/10 text-white text-sm font-medium hover:bg-white/5 transition">
-                Kembali
-            </button>
-            <a href="/" class="px-6 py-2.5 rounded-full bg-white text-black text-sm font-bold hover:bg-zinc-200 transition shadow-lg shadow-purple-500/20">
-                Ke Beranda
-            </a>
-        </div>
-    </main>
-</body>
-</html>
+<%- include('partials/footer') %>
+<%- include('partials/scripts') %>

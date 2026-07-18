@@ -1,0 +1,28 @@
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 z-40 hidden lg:hidden"></div>
+        <aside id="sidebar" class="fixed lg:sticky top-0 lg:top-16 z-50 lg:z-0 w-64 h-full lg:h-[calc(100vh-4rem)] -translate-x-full lg:translate-x-0 transition-transform duration-300 bg-ink-900 border-r border-white/5 overflow-y-auto scrollbar-thin p-4 space-y-6">
+            <nav class="space-y-1">
+                <a href="/" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition <%= active === 'home' ? 'bg-brand-600/20 text-brand-300' : 'text-slate-300 hover:bg-ink-850 hover:text-white' %>">
+                    <i class="fas fa-house w-5 text-center"></i> Beranda
+                </a>
+                <a href="/popular" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition <%= active === 'popular' ? 'bg-brand-600/20 text-brand-300' : 'text-slate-300 hover:bg-ink-850 hover:text-white' %>">
+                    <i class="fas fa-fire w-5 text-center"></i> Populer
+                </a>
+                <a href="/latest" class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold transition <%= active === 'latest' ? 'bg-brand-600/20 text-brand-300' : 'text-slate-300 hover:bg-ink-850 hover:text-white' %>">
+                    <i class="fas fa-clock w-5 text-center"></i> Terbaru
+                </a>
+            </nav>
+
+            <div>
+                <h3 class="px-3 mb-2 text-[11px] font-bold uppercase tracking-wider text-slate-500">Genre</h3>
+                <div class="flex flex-wrap gap-2 px-1">
+                    <% const genres = ['action','romance','drama','fantasy','comedy','adventure','slice-of-life','supernatural','martial-arts','webtoons','manhwa','manhua']; %>
+                    <% genres.forEach(g => { %>
+                        <a href="/genre/<%= g %>" class="px-2.5 py-1 rounded-lg text-xs font-medium bg-ink-850 border border-white/5 hover:border-brand-500/40 hover:text-brand-300 text-slate-400 capitalize transition"><%= g.replace(/-/g,' ') %></a>
+                    <% }) %>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-white/5">
+                <p class="px-3 text-[11px] text-slate-600 leading-relaxed">Koleksi manhwa, manhua, & webtoon terupdate.</p>
+            </div>
+        </aside>
