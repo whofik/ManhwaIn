@@ -1,16 +1,18 @@
 [build]
   command = "npm install"
   publish = "public"
-  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
 
-[[functions]]
-  name = "server"
+[functions]
+  directory = "netlify/functions"
   node_bundler = "nft"
   included_files = ["views/**", "public/**", "node_modules/ejs/**"]
-  timeout = 26
+
+[[functions]]
+  name = "server"
+  timeout = 20
 
 [[redirects]]
   from = "/*"

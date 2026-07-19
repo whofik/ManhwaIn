@@ -1,6 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const path = require('path')
+const fs = require('fs')
 const homeRoute = require('./routes/home')
 const searchRoute = require('./routes/search')
 const browseRoute = require('./routes/browse')
@@ -9,9 +10,18 @@ const detailRoute = require('./routes/detail')
 const app = express()
 const port = process.env.PORT || 3001
 
-app.use(express.static(path.join(__dirname, 'public')))
+function assetDir(name) {
+    const roots = [__dirname, path.join(__dirname, '..'), process.cwd(), path.join(process.cwd(), '..')]
+    for (const root of roots) {
+        const p = path.join(root, name)
+        if (fs.existsSync(p)) return p
+    }
+    return path.join(process.cwd(), name)
+}
+
+app.use(express.static(assetDir('public')))
 app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', assetDir('views'))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
