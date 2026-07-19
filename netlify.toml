@@ -9,9 +9,7 @@
 [functions]
   node_bundler = "nft"
   included_files = ["views/**", "public/**"]
-  timeout = 30
 
-[[redirects]]
-  from = "/*"
-  to = "/.netlify/functions/server"
-  status = 200
+[[functions]]
+  name = "server"
+  timeout = 26
