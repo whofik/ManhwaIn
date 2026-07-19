@@ -6,10 +6,8 @@
 [build.environment]
   NODE_VERSION = "20"
 
-[functions]
-  node_bundler = "nft"
-  included_files = ["views/**", "public/**"]
-
 [[functions]]
   name = "server"
+  node_bundler = "nft"
+  included_files = ["views/**", "public/**"]
   timeout = 26
