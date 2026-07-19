@@ -9,5 +9,11 @@
 [[functions]]
   name = "server"
   node_bundler = "nft"
-  included_files = ["views/**", "public/**"]
+  included_files = ["views/**", "public/**", "node_modules/ejs/**"]
   timeout = 26
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
+  force = true

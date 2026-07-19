@@ -2,6 +2,7 @@ require('dotenv').config()
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
+require('ejs')
 
 const homeRoute = require('./routes/home');
 const searchRoute = require('./routes/search');
